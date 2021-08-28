@@ -3,8 +3,8 @@ package com.bridgelabz.tictactoe;
 import java.util.Scanner;
 
 public class TicTacToeGame {
-	String turn1="x";
-	String turn2;
+	String user="x";
+	String computer;
 	public  void createBoard() {
 		
 		char[] board = new char[10];
@@ -19,13 +19,13 @@ public class TicTacToeGame {
 		System.out.println("Enter the letter X or O");
 		String letter=sc.next();
 		
-		if(turn1.equals(letter)) {
-			turn2="o";
+		if(user.equals(letter)) {
+			user="x";
 		}else {
-			turn2="x";
+			computer="o";
 		}
-		System.out.println(turn1);
-		System.out.println(turn2);
+		System.out.println(user);
+		System.out.println(computer);
 	
 	}
 	public static void main(String[] args) {
