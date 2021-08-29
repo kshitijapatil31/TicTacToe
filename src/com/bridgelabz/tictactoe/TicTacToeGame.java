@@ -4,19 +4,21 @@ import java.util.Scanner;
 
 public class TicTacToeGame {
 	String user="x";
-	String computer;
+	String computer="null";
 	char[] board = new char[10];
+	Scanner sc=new Scanner(System.in);
+	int move=sc.nextInt();
 	public  void createBoard() {
 		
 		
       
-		for(int i=0;i<10;i++) {
-			board[i]='*';
+		for(int i=0;i<=10;i++) {
+			board[i]=(char) i;
 		}
 	}
 
 	public void allowPlayer() {
-		Scanner sc=new Scanner(System.in);
+		
 		System.out.println("Enter the letter X or O");
 		String letter=sc.next();
 		
@@ -28,6 +30,26 @@ public class TicTacToeGame {
 		System.out.println(user);
 		System.out.println(computer);
 	
+	}
+	
+	
+	public void movePlyer() {
+		while(true) {
+		if(!(move>0&&move<=9)) {
+			System.out.println("you have enter wrong number");
+		}if(isFree(move)){
+			System.out.println("move player");;
+		}
+		}
+		
+		
+	}
+	public  boolean isFree(int index) {
+		if(board[index]=='*') {
+			return true;
+		}else {
+			return false;
+		}
 	}
 	public void printBoard() {
 		System.out.println("Tic Tac Toe Board");
