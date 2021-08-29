@@ -6,12 +6,11 @@ public class TicTacToeGame {
 	String user="x";
 	String computer="null";
 	char[] board = new char[10];
-	Scanner sc=new Scanner(System.in);
-	int move=sc.nextInt();
+    char letter;
+    Scanner sc=new Scanner(System.in);
+	
+	
 	public  void createBoard() {
-		
-		
-      
 		for(int i=0;i<=10;i++) {
 			board[i]=(char) i;
 		}
@@ -20,7 +19,7 @@ public class TicTacToeGame {
 	public void allowPlayer() {
 		
 		System.out.println("Enter the letter X or O");
-		String letter=sc.next();
+		letter=sc.next().charAt(0);
 		
 		if(user.equals(letter)) {
 			user="x";
@@ -33,17 +32,23 @@ public class TicTacToeGame {
 	}
 	
 	
-	public void movePlyer() {
+	public void movePlayer() {
+		System.out.println("make a move between 1 to 9 :");
+		int move=sc.nextInt();
 		while(true) {
 		if(!(move>0&&move<=9)) {
 			System.out.println("you have enter wrong number");
 		}if(isFree(move)){
-			System.out.println("move player");;
+			assignPosition(move);
 		}
 		}
 		
 		
 	}
+	void assignPosition(int move){
+		board[move]=letter;
+	}
+	
 	public  boolean isFree(int index) {
 		if(board[index]=='*') {
 			return true;
@@ -62,6 +67,7 @@ public class TicTacToeGame {
 		tictactoe.createBoard();
 		tictactoe.allowPlayer();
 		tictactoe.printBoard();
+		tictactoe.movePlayer();
 	}
 
 }
