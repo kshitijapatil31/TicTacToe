@@ -1,17 +1,18 @@
 package com.bridgelabz.tictactoe;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class TicTacToeGame {
 	String user="x";
-	String computer="null";
+	String computer="o";
 	char[] board = new char[10];
     char letter;
     Scanner sc=new Scanner(System.in);
 	
 	
 	public  void createBoard() {
-		for(int i=0;i<=10;i++) {
+		for(int i=0;i<10;i++) {
 			board[i]=(char) i;
 		}
 	}
@@ -32,7 +33,7 @@ public class TicTacToeGame {
 	}
 	
 	
-	public void movePlayer() {
+	public void movePlayer(String whoseturn) {
 		System.out.println("make a move between 1 to 9 :");
 		int move=sc.nextInt();
 		while(true) {
@@ -41,6 +42,7 @@ public class TicTacToeGame {
 		}if(isFree(move)){
 			assignPosition(move);
 		}
+	
 		}
 		
 		
@@ -56,6 +58,18 @@ public class TicTacToeGame {
 			return false;
 		}
 	}
+	public void toss() {
+		
+		Random random=new Random();
+		int toss=random.nextInt(2);
+		if(toss==1) {
+			System.out.println("user Win toss");
+			movePlayer(user);
+		}else {
+			System.out.println("computer Win toss");
+			movePlayer(computer);
+		}
+	}
 	public void printBoard() {
 		System.out.println("Tic Tac Toe Board");
 		System.out.println(board[0]+"-----"+board[1]+"-----"+board[2]+"-----");
@@ -65,9 +79,9 @@ public class TicTacToeGame {
 	public static void main(String[] args) {
 		TicTacToeGame tictactoe=new TicTacToeGame();
 		tictactoe.createBoard();
-		tictactoe.allowPlayer();
 		tictactoe.printBoard();
-		tictactoe.movePlayer();
+		tictactoe.allowPlayer();
+		tictactoe.toss();
 	}
 
 }
