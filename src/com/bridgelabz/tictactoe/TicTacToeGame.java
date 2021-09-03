@@ -35,56 +35,59 @@ public class TicTacToeGame {
 	public void movePlayer(char userSelect) {
 		System.out.println("make a move between 1 to 9 :");
 		int move = sc.nextInt();
-		while (true) {
-			if (!(move > 0 && move <= 9)) {
-				System.out.println("you have enter wrong number");
-			}
-			if (isFree(move)) {
-				assignPosition(move, userSelect);
-			}
-			computerMove();
+
+		if (!(move > 0 && move <= 9)) {
+			System.out.println("you have enter wrong number");
 		}
+		if (isFree(move)) {
+			assignPosition(move, userSelect);
+		}
+		
+		computerMove();
 
 	}
-public void computerMove() {
-	System.out.println("computer turn");
-	char computerSelect=symbol();
-	System.out.println("make a move between 1 to 9 :");
-	int move = sc.nextInt();
-	while (true) {
+
+	public void computerMove() {
+		System.out.println("computer turn");
+		char computerSelect = symbol();
+		System.out.println("make a move between 1 to 9 :");
+		int move = sc.nextInt();
+
 		if (!(move > 0 && move <= 9)) {
 			System.out.println("you have enter wrong number");
 		}
 		if (isFree(move)) {
 			assignPosition(move, computerSelect);
 		}
-
+		
 	}
-}
+
 	void assignPosition(int move, char userSelect) {
-		if(checkWinner()) {
+		if (checkWinner()) {
 			System.out.println("win");
-		}else {
-			for(int i=0;i<board.length;i++) {
-				if(board[0]=='*') {
-					board[0]=userSelect;
+		} else {
+			for (int i = 0; i < board.length; i++) {
+				if (board[0] == '*') {
+					board[0] = userSelect;
 					return;
-				}else if(board[2]=='*') {
-					board[1]=userSelect;
+				} else if (board[2] == '*') {
+					board[1] = userSelect;
 					return;
-				}else if(board[6]=='*') {
-					board[6]=userSelect;
+				} else if (board[6] == '*') {
+					board[6] = userSelect;
 					return;
-				}else if(board[8]=='*') {
-					board[8]=userSelect;
+				} else if (board[8] == '*') {
+					board[8] = userSelect;
 					return;
-				}else {
-					board[4]=userSelect;
+				} else if (board[4] == '*') {
+					board[4] = userSelect;
 					return;
+				} else {
+					board[move] = userSelect;
 				}
 			}
 		}
-		board[move] = userSelect;
+
 		printBoard();
 	}
 
@@ -144,54 +147,64 @@ public void computerMove() {
 	}
 
 	public int checkOpponentWin(char userSelect) {
-		for(int i=0;i<board.length;i++) {
-		if(checkwin(userSelect)) {
-			return i;
-			
-		}else {
-			board[i]=userSelect;
-		}
+		for (int i = 0; i < board.length; i++) {
+			if (checkwin(userSelect)) {
+				return i;
+
+			} else {
+				board[i] = userSelect;
+			}
 		}
 		return 0;
 	}
+
 	public boolean checkwin(char userSelect) {
-		for(int i=0;i<board.length;i++){
-			if(board[i]=='*') {
-				board[i]=userSelect;
-			
-			if(checkWinner()) {
-				movePlayer(userSelect);
-				return true;
-			}
+		for (int i = 0; i < board.length; i++) {
+			if (board[i] == '*') {
+				board[i] = userSelect;
+
+				if (checkWinner()) {
+					movePlayer(userSelect);
+					return true;
+				}
 			}
 		}
 		return false;
 	}
-	
+
 	public void printBoard() {
 		System.out.println("Tic Tac Toe Board");
-		System.out.println(board[0] + "-----" + board[1] + "-----" + board[2] );
-		System.out.println(board[4] + "-----" + board[5] + "-----" + board[6] );
-		System.out.println(board[7] + "-----" + board[8] + "-----" + board[9] );
+		System.out.println(board[0] + "-----" + board[1] + "-----" + board[2]);
+		System.out.println(board[4] + "-----" + board[5] + "-----" + board[6]);
+		System.out.println(board[7] + "-----" + board[8] + "-----" + board[9]);
 	}
 
 	public static void main(String[] args) {
 		TicTacToeGame tictactoe = new TicTacToeGame();
+		
+		String currentTurn="user";
 		tictactoe.createBoard();
 		tictactoe.printBoard();
 
 //		char userSelect = tictactoe.symbol();
 //		tictactoe.allowPlayer(userSelect);
-		if (tictactoe.toss()) {
-			char userSelect = tictactoe.symbol();
-			tictactoe.allowPlayer(userSelect);
-			tictactoe.movePlayer(userSelect);
-		}else {
-			tictactoe.computerMove();
-			tictactoe.printBoard();
-			tictactoe.checkWinner();
-		}
 
+		while (!tictactoe.checkWinner()) {
+			if (tictactoe.toss()) {
+				char userSelect = tictactoe.symbol();
+				tictactoe.allowPlayer(userSelect);
+				tictactoe.movePlayer(userSelect);
+				tictactoe.printBoard();
+			} else {
+				tictactoe.computerMove();
+				tictactoe.printBoard();
+				tictactoe.checkWinner();
+			}
+		}
+		System.out.println();
+		if(tictactoe.checkWinner()==true) {
+			System.out.println("The winner is: "+currentTurn);
+		}
 	}
 
 }
