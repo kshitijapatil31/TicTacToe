@@ -121,6 +121,26 @@ public void computerMove() {
 		return false;
 	}
 
+	public int checkOpponentWin(char userSelect) {
+		for(int i=0;i<board.length;i++) {
+		if(checkwin(userSelect)) {
+			return i;
+			
+		}else {
+			board[i]=userSelect;
+		}
+		}
+		return 0;
+	}
+	public boolean checkwin(char userSelect) {
+		for(int i=0;i<board.length;i++){
+			if(checkWinner()) {
+				movePlayer(userSelect);
+				return true;
+			}
+		}
+		return false;
+	}
 	public void printBoard() {
 		System.out.println("Tic Tac Toe Board");
 		System.out.println(board[0] + "-----" + board[1] + "-----" + board[2] );
@@ -141,6 +161,8 @@ public void computerMove() {
 			tictactoe.movePlayer(userSelect);
 		}else {
 			tictactoe.computerMove();
+			tictactoe.printBoard();
+			tictactoe.checkWinner();
 		}
 
 	}
