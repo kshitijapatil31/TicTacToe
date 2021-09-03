@@ -78,6 +78,9 @@ public void computerMove() {
 				}else if(board[8]=='*') {
 					board[8]=userSelect;
 					return;
+				}else {
+					board[4]=userSelect;
+					return;
 				}
 			}
 		}
