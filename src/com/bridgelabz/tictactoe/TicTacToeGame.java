@@ -188,10 +188,10 @@ public class TicTacToeGame {
 
 //		char userSelect = tictactoe.symbol();
 //		tictactoe.allowPlayer(userSelect);
-
+		char userSelect = ' ';
 		while (!tictactoe.checkWinner()) {
 			if (tictactoe.toss()) {
-				char userSelect = tictactoe.symbol();
+				userSelect = tictactoe.symbol();
 				tictactoe.allowPlayer(userSelect);
 				tictactoe.movePlayer(userSelect);
 				tictactoe.printBoard();
@@ -200,11 +200,33 @@ public class TicTacToeGame {
 				tictactoe.printBoard();
 				tictactoe.checkWinner();
 			}
+			System.out.println();
+			if(tictactoe.checkWinner()==true) {
+				System.out.println("The winner is: "+currentTurn);
+			}
+			tictactoe.checkwin(userSelect);
+			System.out.println("want to play another game enter 1.Yes or 2.no");
+		    Scanner sc=new Scanner(System.in);
+		    String input=sc.next();
+		if(input=="yes") {
+			while (!tictactoe.checkWinner()) {
+				if (tictactoe.toss()) {
+					userSelect = tictactoe.symbol();
+					tictactoe.allowPlayer(userSelect);
+					tictactoe.movePlayer(userSelect);
+					tictactoe.printBoard();
+				} else {
+					tictactoe.computerMove();
+					tictactoe.printBoard();
+					tictactoe.checkWinner();
+				}
 		}
-		System.out.println();
-		if(tictactoe.checkWinner()==true) {
-			System.out.println("The winner is: "+currentTurn);
+			
+		}else {
+			System.out.println("exit");
 		}
+		
+	}
 	}
 
 }
